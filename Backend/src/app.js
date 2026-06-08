@@ -34,3 +34,9 @@ app.use(
   "/api/v1/departments",
   departmentRoutes
 );
+import userRoutes
+from "./routes/userRoutes.js";
+app.use(
+    "/api/v1/users",
+    userRoutes
+);
