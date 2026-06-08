@@ -4,7 +4,8 @@ const departmentSchema = new mongoose.Schema(
 {
     name:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
 
     description:String,
@@ -12,7 +13,13 @@ const departmentSchema = new mongoose.Schema(
     head:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User"
+    },
+
+    active:{
+        type:Boolean,
+        default:true
     }
+
 },
 {
     timestamps:true
