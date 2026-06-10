@@ -34,3 +34,24 @@ app.use(
   "/api/v1/departments",
   departmentRoutes
 );
+import taskRoutes
+from "./routes/taskRoutes.js";
+
+app.use(
+  "/api/v1/tasks",
+  taskRoutes
+);
+import activityLogRoutes
+from "./routes/activityLogRoutes.js";
+
+app.use(
+  "/api/v1/activity-logs",
+  activityLogRoutes
+);
+import deliverableRoutes
+from "./routes/deliverableRoutes.js";
+
+app.use(
+  "/api/v1/deliverables",
+  deliverableRoutes
+);
