@@ -41,6 +41,7 @@ const userSchema = new mongoose.Schema(
     active: {
       type: Boolean,
       default: true,
+      index: true,
     },
 
     lastLogin: {
@@ -51,6 +52,7 @@ const userSchema = new mongoose.Schema(
     timestamps: true,
   },
 );
+
 userSchema.pre("save", async function () {
   if (!this.isModified("password")) return;
 
@@ -58,7 +60,26 @@ userSchema.pre("save", async function () {
 
   this.password = await bcrypt.hash(this.password, salt);
 });
+
 userSchema.methods.comparePassword = async function (candidatePassword) {
   return await bcrypt.compare(candidatePassword, this.password);
 };
+
+// Indexes
+userSchema.index({ department: 1 });
+
+userSchema.index({ role: 1 });
+
+userSchema.index({ active: 1 });
+
+userSchema.index({
+  department: 1,
+  role: 1,
+});
+
+userSchema.index({
+  department: 1,
+  active: 1,
+});
+
 export default mongoose.model("User", userSchema);
