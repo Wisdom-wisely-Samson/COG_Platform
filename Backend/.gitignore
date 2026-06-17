@@ -1,4 +1,38 @@
-node_modules
-dist
-build
+# ── Dependencies ─────────────────────────────────────────────────────────────
+node_modules/
+
+# ── Build output ──────────────────────────────────────────────────────────────
+dist/
+build/
+
+# ── Environment variables ─────────────────────────────────────────────────────
+# Keep example.env (safe template) but never commit the real .env
 .env
+.env.*
+!example.env
+
+# ── User-uploaded files ───────────────────────────────────────────────────────
+# Stored locally during development; use cloud storage (S3, Cloudinary) in prod
+uploads/
+
+# ── Logs ─────────────────────────────────────────────────────────────────────
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# ── OS & editor ───────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+*.suo
+*.sw?
+
+# ── VS Code ───────────────────────────────────────────────────────────────────
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# ── Test coverage ─────────────────────────────────────────────────────────────
+coverage/
