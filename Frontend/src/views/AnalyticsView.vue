@@ -67,7 +67,7 @@ const weeklyBars = [
 
 const deptRates = [
   { name: 'Admin / Ops', value: '88%', color: '#E07A00', valueClass: 'text-success' },
-  { name: 'PR & Media',  value: '78%', color: '#C41230', valueClass: ''             },
+  { name: 'PR & Media',  value: '78%', color: '#FF6600', valueClass: ''             },
   { name: 'Creative',    value: '82%', color: '#2E7D32', valueClass: ''             },
   { name: 'Digital',     value: '70%', color: '#1C5FAD', valueClass: ''             },
 ]

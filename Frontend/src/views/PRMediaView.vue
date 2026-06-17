@@ -79,7 +79,7 @@
         <i class="ti ti-circle-check text-base"></i>{{ successMsg }}
       </div>
       <!-- Error banner -->
-      <div v-if="errorMsg" class="mb-4 flex items-center gap-2 px-3 py-2.5 rounded-md bg-[#FEE8E8] border border-[#F5BFBF] text-[#C41230] text-xs font-medium">
+      <div v-if="errorMsg" class="mb-4 flex items-center gap-2 px-3 py-2.5 rounded-md bg-[#FEE8E8] border border-[#F5BFBF] text-[#FF6600] text-xs font-medium">
         <i class="ti ti-alert-circle text-base"></i>{{ errorMsg }}
       </div>
 
@@ -104,7 +104,7 @@
           <div v-if="cutoutFiles.length" class="mt-2 space-y-1">
             <div v-for="(f, i) in cutoutFiles" :key="i" class="flex items-center justify-between px-2 py-1 bg-white border border-[#E1E4E9] rounded text-[11px]">
               <span class="truncate max-w-[140px]">{{ f.name }}</span>
-              <button @click="cutoutFiles.splice(i,1)" class="text-muted hover:text-[#C41230] ml-1"><i class="ti ti-x text-xs"></i></button>
+              <button @click="cutoutFiles.splice(i,1)" class="text-muted hover:text-[#FF6600] ml-1"><i class="ti ti-x text-xs"></i></button>
             </div>
           </div>
         </div>
@@ -115,7 +115,7 @@
           <div v-for="(link, i) in mediaLinks" :key="i" class="flex items-center border border-[#E1E4E9] rounded-md overflow-hidden mb-2">
             <span class="px-2.5 py-[9px] bg-[#F9FAFB] text-[13px] text-muted border-r border-[#E1E4E9] font-mono">https://</span>
             <input v-model="mediaLinks[i]" class="flex-1 border-none px-3 py-[9px] text-xs bg-transparent text-[#1A2332] focus:outline-none" :placeholder="i === 0 ? 'youtube.com/watch?v=...' : 'Add another link...'">
-            <button v-if="mediaLinks.length > 1" @click="mediaLinks.splice(i,1)" class="px-2 text-muted hover:text-[#C41230]"><i class="ti ti-x text-xs"></i></button>
+            <button v-if="mediaLinks.length > 1" @click="mediaLinks.splice(i,1)" class="px-2 text-muted hover:text-[#FF6600]"><i class="ti ti-x text-xs"></i></button>
           </div>
           <button @click="mediaLinks.push('')" class="text-[11px] text-accent hover:underline">+ Add link</button>
         </div>
@@ -140,7 +140,7 @@
           <div v-if="kitFiles.length" class="mt-2 space-y-1">
             <div v-for="(f, i) in kitFiles" :key="i" class="flex items-center justify-between px-2 py-1 bg-white border border-[#E1E4E9] rounded text-[11px]">
               <span class="truncate max-w-[140px]">{{ f.name }}</span>
-              <button @click="kitFiles.splice(i,1)" class="text-muted hover:text-[#C41230] ml-1"><i class="ti ti-x text-xs"></i></button>
+              <button @click="kitFiles.splice(i,1)" class="text-muted hover:text-[#FF6600] ml-1"><i class="ti ti-x text-xs"></i></button>
             </div>
           </div>
         </div>
@@ -148,7 +148,7 @@
 
       <!-- Event / Campaign Name -->
       <div class="mt-4">
-        <label class="block text-[11px] font-semibold uppercase tracking-[0.05em] text-muted mb-1.5">Event / Campaign Name <span class="text-[#C41230]">*</span></label>
+        <label class="block text-[11px] font-semibold uppercase tracking-[0.05em] text-muted mb-1.5">Event / Campaign Name <span class="text-[#FF6600]">*</span></label>
         <input v-model="eventName" class="bg-white border border-[#E1E4E9] rounded-md px-3 py-2 text-[13px] text-[#1A2332] w-full focus:outline-none focus:border-accent" placeholder="e.g. Annual General Meeting 2025">
       </div>
 
@@ -172,20 +172,28 @@
     <div v-show="tab === 'events'">
       <label class="block text-[11px] font-semibold uppercase tracking-[0.05em] text-muted mb-1.5">Upcoming PR Events</label>
       <div class="bg-white border border-[#E1E4E9] rounded-[10px] overflow-hidden">
-        <div class="flex items-center gap-2.5 px-3 py-[9px] border-b border-[#E1E4E9] text-xs"><input type="checkbox" class="accent-[#C41230] w-3.5 h-3.5 cursor-pointer"><span>Prepare press pack — Leadership Summit (Jun 10)</span></div>
-        <div class="flex items-center gap-2.5 px-3 py-[9px] border-b border-[#E1E4E9] text-xs"><input type="checkbox" checked class="accent-[#C41230] w-3.5 h-3.5 cursor-pointer"><span class="line-through text-muted">Upload AGM cutouts to archive</span></div>
-        <div class="flex items-center gap-2.5 px-3 py-[9px] border-b border-[#E1E4E9] text-xs"><input type="checkbox" class="accent-[#C41230] w-3.5 h-3.5 cursor-pointer"><span>Submit Q2 media performance report</span></div>
-        <div class="flex items-center gap-2.5 px-3 py-[9px] text-xs"><input type="checkbox" class="accent-[#C41230] w-3.5 h-3.5 cursor-pointer"><span>Follow up on Channels TV feature — CapiPay</span></div>
+        <div v-for="item in prChecklist" :key="item.text"
+             class="flex items-center gap-2.5 px-3 py-[9px] border-b border-[#E1E4E9] last:border-b-0 text-xs">
+          <input type="checkbox" :checked="item.done" @change="item.done = !item.done" class="accent-[#FF6600] w-3.5 h-3.5 cursor-pointer">
+          <span :class="item.done ? 'line-through text-muted' : ''">{{ item.text }}</span>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, reactive, computed, onMounted } from 'vue'
 import { api } from '../api.js'
 
 const tab = ref('log')
+
+const prChecklist = reactive([
+  { text: 'Prepare press pack — Leadership Summit (Jun 10)', done: false },
+  { text: 'Upload AGM cutouts to archive',                   done: true  },
+  { text: 'Submit Q2 media performance report',              done: false },
+  { text: 'Follow up on Channels TV feature — CapiPay',     done: false },
+])
 
 // ── Activity log data ─────────────────────────────────────────────────────────
 const tasks       = ref([])

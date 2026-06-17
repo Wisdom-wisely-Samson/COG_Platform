@@ -10,6 +10,7 @@ import userRoutes         from './routes/userRoutes.js';
 import departmentRoutes   from './routes/departmentRoutes.js';
 import taskRoutes         from './routes/taskRoutes.js';
 import notificationRoutes from './routes/notificationRoutes.js';
+import evaluationRoutes   from './routes/evaluationRoutes.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -49,6 +50,7 @@ app.use('/api/users',         userRoutes);
 app.use('/api/departments',   departmentRoutes);
 app.use('/api/tasks',         taskRoutes);
 app.use('/api/notifications', notificationRoutes);
+app.use('/api/evaluate',     evaluationRoutes);
 
 // Health check
 app.get('/api/health', (_, res) => res.json({ status: 'ok' }));

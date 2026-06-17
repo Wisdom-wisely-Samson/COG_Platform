@@ -153,9 +153,9 @@
 defineEmits(['navigate', 'open-modal'])
 
 const activityFeed = [
-  { initials: 'AN', color: '#C41230', name: 'Amara Nwosu',  dept: 'PR',       text: 'Uploaded newspaper cutout for Vanguard campaign',   status: 'Ready for Review', statusClass: 'bg-[#FEF3E0] text-warn',    time: '2m ago'  },
-  { initials: 'KO', color: '#1C5FAD', name: 'Kemi Obi',     dept: 'Digital',  text: 'Submitted Q2 social media brief — 3 platforms',      status: 'Approved',         statusClass: 'bg-[#E6F7EF] text-success', time: '18m ago' },
-  { initials: 'TM', color: '#2E7D32', name: 'Tunde Makinde', dept: 'Creative', text: 'Uploaded brand identity poster pack (4 artworks)',   status: 'In Progress',      statusClass: 'bg-[#E4EDF9] text-info',    time: '1h ago'  },
-  { initials: 'FA', color: '#E07A00', name: 'Funmi Adeola',  dept: 'Admin',    text: 'Updated procurement tracker — Q2 vendors confirmed', status: 'Completed',        statusClass: 'bg-[#E6F7EF] text-success', time: '3h ago'  },
+  { initials: 'AN', color: '#FF6600', name: 'Amara Nwosu',  dept: 'PR',       text: 'Uploaded newspaper cutout for Vanguard campaign',   status: 'Ready for Review', statusClass: 'bg-[#FEF3E0] text-warn',    time: '2m ago'  },
+  { initials: 'KO', color: '#FF6600', name: 'Kemi Obi',     dept: 'Digital',  text: 'Submitted Q2 social media brief — 3 platforms',      status: 'Approved',         statusClass: 'bg-[#E6F7EF] text-success', time: '18m ago' },
+  { initials: 'TM', color: '#FF6600', name: 'Tunde Makinde', dept: 'Creative', text: 'Uploaded brand identity poster pack (4 artworks)',   status: 'In Progress',      statusClass: 'bg-[#E4EDF9] text-info',    time: '1h ago'  },
+  { initials: 'FA', color: '#FF6600', name: 'Funmi Adeola',  dept: 'Admin',    text: 'Updated procurement tracker — Q2 vendors confirmed', status: 'Completed',        statusClass: 'bg-[#E6F7EF] text-success', time: '3h ago'  },
 ]
 </script>

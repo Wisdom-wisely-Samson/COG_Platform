@@ -31,7 +31,7 @@ function formatUser(u) {
     role:     ROLE_MAP[u.role] ?? 'staff',
     dept:     u.department ? (DEPT_SLUG[u.department.name] ?? null) : null,
     active:   u.active,
-    color:    '#C41230',
+    color:    '#FF6600',
   };
 }
 

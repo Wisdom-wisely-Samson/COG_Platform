@@ -83,7 +83,7 @@
               <div class="flex items-center gap-2.5">
                 <!-- Avatar -->
                 <div class="w-8 h-8 rounded-full shrink-0 overflow-hidden flex items-center justify-center text-white text-[11px] font-semibold"
-                     :style="{ background: u.image ? 'transparent' : u.color }">
+                     :style="{ background: u.image ? 'transparent' : '#FF6600' }">
                   <img v-if="u.image" :src="u.image" class="w-full h-full object-cover" alt="">
                   <span v-else>{{ u.initials }}</span>
                 </div>
@@ -440,7 +440,7 @@ function validate() {
 function initials(name) {
   return name.trim().split(' ').map(w => w[0]?.toUpperCase() ?? '').slice(0, 2).join('')
 }
-const COLORS = ['#C41230','#1C5FAD','#2E7D32','#E07A00','#6B7896','#0D2B4F']
+const COLORS = ['#FF6600','#1C5FAD','#2E7D32','#E07A00','#6B7896','#0D2B4F']
 
 async function saveUser() {
   if (!validate()) return
