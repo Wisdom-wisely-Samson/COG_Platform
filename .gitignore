@@ -1,0 +1,18 @@
+# ── Claude Code (IDE assistant settings) ─────────────────────────────────────
+.claude/
+
+# ── OS generated files ────────────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ── Logs ─────────────────────────────────────────────────────────────────────
+logs/
+*.log
+
+# ── Generated reports & one-off scripts ──────────────────────────────────────
+*.pdf
+generate-report.mjs
