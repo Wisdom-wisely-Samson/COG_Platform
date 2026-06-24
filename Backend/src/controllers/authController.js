@@ -37,7 +37,7 @@ function buildUserPayload(user) {
     dept,
     email:    user.email,
     active:   user.active,
-    color:    '#C41230', // default — can be stored per-user later
+    color:    '#FF6600', // default — can be stored per-user later
   };
 }
 

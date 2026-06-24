@@ -65,7 +65,7 @@
       </div>
 
       <!-- Update error -->
-      <div v-if="updateError" class="mt-3 flex items-center gap-2 px-3 py-2.5 rounded-md bg-[#FEE8E8] border border-[#F5BFBF] text-[#C41230] text-xs font-medium">
+      <div v-if="updateError" class="mt-3 flex items-center gap-2 px-3 py-2.5 rounded-md bg-[#FEE8E8] border border-[#F5BFBF] text-[#FF6600] text-xs font-medium">
         <i class="ti ti-alert-circle text-base"></i>{{ updateError }}
       </div>
     </div>
@@ -77,7 +77,7 @@
         <i class="ti ti-circle-check text-base"></i>{{ copySuccess }}
       </div>
       <!-- Error banner -->
-      <div v-if="copyError" class="mb-4 flex items-center gap-2 px-3 py-2.5 rounded-md bg-[#FEE8E8] border border-[#F5BFBF] text-[#C41230] text-xs font-medium">
+      <div v-if="copyError" class="mb-4 flex items-center gap-2 px-3 py-2.5 rounded-md bg-[#FEE8E8] border border-[#F5BFBF] text-[#FF6600] text-xs font-medium">
         <i class="ti ti-alert-circle text-base"></i>{{ copyError }}
       </div>
 
@@ -95,7 +95,7 @@
       </div>
 
       <!-- Caption -->
-      <label class="block text-[11px] font-semibold uppercase tracking-[0.05em] text-muted mb-1.5">Post Caption <span class="text-[#C41230]">*</span></label>
+      <label class="block text-[11px] font-semibold uppercase tracking-[0.05em] text-muted mb-1.5">Post Caption <span class="text-[#FF6600]">*</span></label>
       <textarea
         v-model="caption"
         class="bg-white border border-[#E1E4E9] rounded-md p-3 text-[13px] leading-relaxed min-h-[100px] text-[#1A2332] resize-y w-full focus:outline-none focus:border-accent"
@@ -133,7 +133,7 @@
     <!-- ── Content Calendar ────────────────────────────────────────────────── -->
     <div v-show="tab === 'cal'">
       <!-- Cal update error -->
-      <div v-if="calError" class="mb-3 flex items-center gap-2 px-3 py-2.5 rounded-md bg-[#FEE8E8] border border-[#F5BFBF] text-[#C41230] text-xs font-medium">
+      <div v-if="calError" class="mb-3 flex items-center gap-2 px-3 py-2.5 rounded-md bg-[#FEE8E8] border border-[#F5BFBF] text-[#FF6600] text-xs font-medium">
         <i class="ti ti-alert-circle text-base"></i>{{ calError }}
       </div>
 

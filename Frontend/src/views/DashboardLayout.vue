@@ -96,7 +96,7 @@
       <div class="p-3 border-t border-white/10">
         <div class="flex items-center gap-2 p-2">
           <div class="w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-semibold text-white shrink-0"
-               :style="{ background: user?.color ?? '#C41230' }">{{ user?.initials ?? 'SA' }}</div>
+               :style="{ background: '#FF6600' }">{{ user?.initials ?? 'SA' }}</div>
           <div class="flex-1 min-w-0">
             <div class="text-white/85 text-xs font-medium truncate">{{ user?.name ?? 'Super Admin' }}</div>
             <div class="text-white/40 text-[10px]">{{ isAdmin ? 'Executive Access' : isHead ? 'Head of Department' : (DEPT_LABELS[userDept] ?? 'Staff') }}</div>

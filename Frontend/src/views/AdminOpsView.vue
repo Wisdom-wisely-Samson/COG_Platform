@@ -15,7 +15,7 @@
         <div class="bg-white border border-[#E1E4E9] rounded-[10px] overflow-hidden">
           <div v-for="item in checklist" :key="item.text"
                class="flex items-center gap-2.5 px-3 py-[9px] border-b border-[#E1E4E9] last:border-b-0 text-xs">
-            <input type="checkbox" :checked="item.done" class="accent-[#C41230] w-3.5 h-3.5 cursor-pointer">
+            <input type="checkbox" :checked="item.done" @change="item.done = !item.done" class="accent-[#FF6600] w-3.5 h-3.5 cursor-pointer">
             <span :class="item.done ? 'line-through text-muted' : ''">{{ item.text }}</span>
           </div>
         </div>
@@ -64,14 +64,16 @@
 </template>
 
 <script setup>
-const checklist = [
+import { reactive } from 'vue'
+
+const checklist = reactive([
   { text: 'Monthly payroll processing',            done: true  },
   { text: 'Vendor invoice reconciliation — May',   done: true  },
   { text: 'Facility maintenance scheduling — Jun', done: false },
   { text: 'Prepare Q2 expense report',             done: false },
   { text: 'Staff ID renewal batch — 8 employees',  done: true  },
   { text: 'Update IT asset register',              done: false },
-]
+])
 
 const procurement = [
   { item: 'Office Supplies', vendor: 'StationeryHub', status: 'Received', statusClass: 'bg-[#E6F7EF] text-success border-[#B6E6D0]', amount: '₦180K' },

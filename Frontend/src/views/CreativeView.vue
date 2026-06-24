@@ -369,11 +369,11 @@ function ext(filename) {
 
 // ── Static placeholder data ───────────────────────────────────────────────────
 const stillAssets = [
-  { bg: '#FDE8EC', icon: 'ti-photo', color: '#C41230', label: 'Brand Identity v3',     badge: 'Final',  badgeClass: 'bg-[#E6F7EF] text-success' },
+  { bg: '#FDE8EC', icon: 'ti-photo', color: '#FF6600', label: 'Brand Identity v3',     badge: 'Final',  badgeClass: 'bg-[#E6F7EF] text-success' },
   { bg: '#E4EDF9', icon: 'ti-photo', color: '#1C5FAD', label: 'CapiPay Launch Poster', badge: 'Review', badgeClass: 'bg-[#FEF3E0] text-warn'    },
   { bg: '#EFF6E8', icon: 'ti-photo', color: '#2E7D32', label: 'AGM Backdrop Design',   badge: 'Final',  badgeClass: 'bg-[#E6F7EF] text-success' },
   { bg: '#FEF3E0', icon: 'ti-photo', color: '#E07A00', label: 'Staff Week Banner',     badge: 'Draft',  badgeClass: 'bg-[#E4EDF9] text-info'    },
-  { bg: '#FDE8EC', icon: 'ti-photo', color: '#C41230', label: 'Social Card — Q2',      badge: 'Final',  badgeClass: 'bg-[#E6F7EF] text-success' },
+  { bg: '#FDE8EC', icon: 'ti-photo', color: '#FF6600', label: 'Social Card — Q2',      badge: 'Final',  badgeClass: 'bg-[#E6F7EF] text-success' },
 ]
 const videoAssets = [
   { bg: '#0D2B4F', icon: 'ti-player-play', label: 'Brand Reveal Reel', badge: 'Final',  badgeClass: 'bg-[#E6F7EF] text-success' },
