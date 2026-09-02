@@ -17,7 +17,7 @@
       </div>
 
       <!-- Uploaded images from backend -->
-      <div v-if="uploadedImages.length" class="grid gap-2.5 mb-4" style="grid-template-columns:repeat(auto-fill,minmax(120px,1fr))">
+      <div v-if="uploadedImages.length" class="grid gap-2.5 mb-6" style="grid-template-columns:repeat(auto-fill,minmax(120px,1fr))">
         <div v-for="img in uploadedImages" :key="img.filename"
              class="border border-[#E1E4E9] rounded-md aspect-square overflow-hidden relative group cursor-pointer hover:border-accent/40 hover:shadow-md transition-all">
           <img :src="img.url" :alt="img.originalName"
@@ -28,19 +28,8 @@
           <span class="absolute top-1.5 right-1.5 text-[9px] px-[5px] py-[2px] rounded-[3px] font-semibold bg-[#E6F7EF] text-success">New</span>
         </div>
       </div>
-
-      <!-- Static placeholder assets -->
-      <div class="grid gap-2.5 mb-6" style="grid-template-columns:repeat(auto-fill,minmax(120px,1fr))">
-        <div v-for="asset in stillAssets" :key="asset.label"
-             class="border border-[#E1E4E9] rounded-md aspect-square flex flex-col items-center justify-center cursor-pointer transition-all relative hover:border-accent/40 hover:shadow-md"
-             :style="{ background: asset.bg }">
-          <i :class="['ti', asset.icon, 'text-[24px]']" :style="{ color: asset.color }"></i>
-          <div class="text-[10px] text-muted mt-1.5 text-center px-1">{{ asset.label }}</div>
-          <span class="absolute top-1.5 right-1.5 text-[9px] px-[5px] py-[2px] rounded-[3px] font-semibold" :class="asset.badgeClass">{{ asset.badge }}</span>
-        </div>
-        <div @click="tab = 'upload'" class="bg-[#F9FAFB] border-2 border-dashed border-[#E1E4E9] rounded-md aspect-square flex flex-col items-center justify-center cursor-pointer hover:border-accent/40 transition-all">
-          <i class="ti ti-plus text-[24px] text-muted"></i><div class="text-[10px] text-muted mt-1.5">Upload New</div>
-        </div>
+      <div v-else class="bg-white border border-[#E1E4E9] rounded-[10px] p-6 text-center text-muted mb-6">
+        No artwork assets have been uploaded yet. Use the Upload Assets tab to submit your first creative file.
       </div>
 
       <div class="text-[13px] font-semibold mb-3.5">Videos &amp; Animated GIFs</div>
@@ -57,19 +46,8 @@
           <span class="absolute top-1.5 right-1.5 text-[9px] px-[5px] py-[2px] rounded-[3px] font-semibold bg-[#E6F7EF] text-success">New</span>
         </div>
       </div>
-
-      <!-- Static placeholder videos -->
-      <div class="grid gap-2.5" style="grid-template-columns:repeat(auto-fill,minmax(120px,1fr))">
-        <div v-for="vid in videoAssets" :key="vid.label"
-             class="border border-[#E1E4E9] rounded-md aspect-square flex flex-col items-center justify-center cursor-pointer relative hover:opacity-90 transition-all"
-             :style="{ background: vid.bg }">
-          <i :class="['ti', vid.icon, 'text-[28px] text-white']"></i>
-          <div class="text-[10px] text-white/70 mt-1.5 text-center px-1">{{ vid.label }}</div>
-          <span class="absolute top-1.5 right-1.5 text-[9px] px-[5px] py-[2px] rounded-[3px] font-semibold" :class="vid.badgeClass">{{ vid.badge }}</span>
-        </div>
-        <div @click="tab = 'upload'" class="bg-[#F9FAFB] border-2 border-dashed border-[#E1E4E9] rounded-md aspect-square flex flex-col items-center justify-center cursor-pointer hover:border-accent/40 transition-all">
-          <i class="ti ti-plus text-[24px] text-muted"></i><div class="text-[10px] text-muted mt-1.5 text-center px-1">Upload Video/GIF</div>
-        </div>
+      <div v-else class="bg-white border border-[#E1E4E9] rounded-[10px] p-6 text-center text-muted mb-6">
+        No videos or GIFs have been uploaded yet. Submit a media asset in the Upload Assets tab to populate this view.
       </div>
     </div>
 
@@ -199,11 +177,6 @@
               <td class="px-3 py-2.5 border-b border-[#E1E4E9]"><span class="text-[10px] px-2 py-[3px] rounded-full font-medium border bg-[#FEF3E0] text-warn border-[#FAD999]">Review</span></td>
               <td class="px-3 py-2.5 border-b border-[#E1E4E9] text-muted">{{ vid.taskTitle }}</td>
             </tr>
-            <!-- Static placeholder rows -->
-            <tr class="hover:[&>td]:bg-[#F4F5F7]"><td class="px-3 py-2.5 border-b border-[#E1E4E9]">Brand Reveal Reel</td><td class="px-3 py-2.5 border-b border-[#E1E4E9]">MP4</td><td class="px-3 py-2.5 border-b border-[#E1E4E9]">—</td><td class="px-3 py-2.5 border-b border-[#E1E4E9]"><span class="text-[10px] px-2 py-[3px] rounded-full font-medium border bg-[#E6F7EF] text-success border-[#B6E6D0]">Final</span></td><td class="px-3 py-2.5 border-b border-[#E1E4E9]">Tunde Makinde</td></tr>
-            <tr class="hover:[&>td]:bg-[#F4F5F7]"><td class="px-3 py-2.5 border-b border-[#E1E4E9]">CapiPay 30s Ad</td><td class="px-3 py-2.5 border-b border-[#E1E4E9]">MP4</td><td class="px-3 py-2.5 border-b border-[#E1E4E9]">—</td><td class="px-3 py-2.5 border-b border-[#E1E4E9]"><span class="text-[10px] px-2 py-[3px] rounded-full font-medium border bg-[#FEF3E0] text-warn border-[#FAD999]">Review</span></td><td class="px-3 py-2.5 border-b border-[#E1E4E9]">Osas Idehen</td></tr>
-            <tr class="hover:[&>td]:bg-[#F4F5F7]"><td class="px-3 py-2.5 border-b border-[#E1E4E9]">Loading Animation</td><td class="px-3 py-2.5 border-b border-[#E1E4E9]">GIF</td><td class="px-3 py-2.5 border-b border-[#E1E4E9]">—</td><td class="px-3 py-2.5 border-b border-[#E1E4E9]"><span class="text-[10px] px-2 py-[3px] rounded-full font-medium border bg-[#E6F7EF] text-success border-[#B6E6D0]">Final</span></td><td class="px-3 py-2.5 border-b border-[#E1E4E9]">Tunde Makinde</td></tr>
-            <tr class="hover:[&>td]:bg-[#F4F5F7]"><td class="px-3 py-2.5">Instagram Stories Pack</td><td class="px-3 py-2.5">MP4</td><td class="px-3 py-2.5">—</td><td class="px-3 py-2.5"><span class="text-[10px] px-2 py-[3px] rounded-full font-medium border bg-[#E4EDF9] text-info border-[#B8D0F0]">Draft</span></td><td class="px-3 py-2.5">Osas Idehen</td></tr>
           </tbody>
         </table>
       </div>
@@ -367,17 +340,4 @@ function ext(filename) {
   return (filename || '').split('.').pop().toUpperCase()
 }
 
-// ── Static placeholder data ───────────────────────────────────────────────────
-const stillAssets = [
-  { bg: '#FDE8EC', icon: 'ti-photo', color: '#FF6600', label: 'Brand Identity v3',     badge: 'Final',  badgeClass: 'bg-[#E6F7EF] text-success' },
-  { bg: '#E4EDF9', icon: 'ti-photo', color: '#1C5FAD', label: 'CapiPay Launch Poster', badge: 'Review', badgeClass: 'bg-[#FEF3E0] text-warn'    },
-  { bg: '#EFF6E8', icon: 'ti-photo', color: '#2E7D32', label: 'AGM Backdrop Design',   badge: 'Final',  badgeClass: 'bg-[#E6F7EF] text-success' },
-  { bg: '#FEF3E0', icon: 'ti-photo', color: '#E07A00', label: 'Staff Week Banner',     badge: 'Draft',  badgeClass: 'bg-[#E4EDF9] text-info'    },
-  { bg: '#FDE8EC', icon: 'ti-photo', color: '#FF6600', label: 'Social Card — Q2',      badge: 'Final',  badgeClass: 'bg-[#E6F7EF] text-success' },
-]
-const videoAssets = [
-  { bg: '#0D2B4F', icon: 'ti-player-play', label: 'Brand Reveal Reel', badge: 'Final',  badgeClass: 'bg-[#E6F7EF] text-success' },
-  { bg: '#2E7D32', icon: 'ti-player-play', label: 'CapiPay 30s Ad',    badge: 'Review', badgeClass: 'bg-[#FEF3E0] text-warn'    },
-  { bg: '#1C5FAD', icon: 'ti-gif',         label: 'Loading Animation', badge: 'Final',  badgeClass: 'bg-[#E6F7EF] text-success' },
-]
 </script>

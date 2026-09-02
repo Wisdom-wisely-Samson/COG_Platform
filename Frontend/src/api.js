@@ -72,8 +72,8 @@ export const api = {
   updateTaskStatus:  (id, status)   => request('PATCH',  `/tasks/${id}/status`, { status }),
   deleteTask:        (id)           => request('DELETE', `/tasks/${id}`),
 
-  // AI Evaluation
-  evaluateTask: (taskId) => request('POST', `/evaluate/${taskId}`),
+  // AI Report Generation
+  generateReport: (taskId) => request('POST', `/evaluate/${taskId}`),
 
   // Notifications
   getNotifications:  ()   => request('GET',   '/notifications'),

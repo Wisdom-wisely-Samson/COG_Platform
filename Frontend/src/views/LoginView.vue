@@ -351,7 +351,7 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from "vue";
 import { useRouter } from "vue-router";
-import { USERS, setUser } from "../users.js";
+import { setUser } from "../users.js";
 import { api } from "../api.js";
 
 const router = useRouter();
@@ -511,12 +511,6 @@ async function submitReset() {
 }
 
 // ── Auth ─────────────────────────────────────────────────────────────────
-function autofill(addr) {
-  email.value = addr;
-  password.value = "admin123";
-  error.value = "";
-}
-
 async function handleLogin() {
   error.value = "";
 
@@ -535,18 +529,6 @@ async function handleLogin() {
     setUser(user, token);
     router.replace(user.role === "admin" ? "/dashboard" : user.dept);
   } catch (e) {
-    // e.status is set by api.js for every HTTP error response (401, 403, etc.)
-    // Only fall back to demo accounts when the backend is genuinely unreachable
-    // (network error → no status code). Never bypass a real 401 from the backend.
-    if (!e.status) {
-      const addr     = email.value.toLowerCase().trim();
-      const mockUser = USERS[addr];
-      if (mockUser && password.value === "admin123") {
-        setUser({ ...mockUser, email: addr });
-        router.replace(mockUser.role === "admin" ? "/dashboard" : mockUser.dept);
-        return;
-      }
-    }
     error.value = e.message || "Invalid credentials.";
   } finally {
     loading.value = false;

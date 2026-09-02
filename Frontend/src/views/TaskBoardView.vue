@@ -24,7 +24,7 @@
             <th class="text-left px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.06em] text-muted border-b border-[#E1E4E9]">Due</th>
             <th class="text-left px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.06em] text-muted border-b border-[#E1E4E9]">Priority</th>
             <th class="text-left px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.06em] text-muted border-b border-[#E1E4E9]">Status</th>
-            <th class="text-left px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.06em] text-muted border-b border-[#E1E4E9]">AI</th>
+            <th class="text-left px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.06em] text-muted border-b border-[#E1E4E9]">AI Report</th>
           </tr>
         </thead>
         <tbody>
@@ -54,12 +54,12 @@
             <td class="px-3 py-2.5 border-b border-[#E1E4E9]">
               <span :class="statusClass(t.status)" class="text-[10px] px-2 py-0.75 rounded-full font-medium border">{{ statusLabel(t.status) }}</span>
             </td>
-            <!-- AI Evaluate button -->
+            <!-- AI Report button -->
             <td class="px-3 py-2.5 border-b border-[#E1E4E9]">
               <button @click="openEvaluate(t)"
-                      title="AI Evaluate"
-                      class="inline-flex items-center gap-1 px-2 py-[4px] rounded-md border border-[#E1E4E9] bg-white text-[10px] text-muted hover:border-accent hover:text-accent transition-colors cursor-pointer">
-                <i class="ti ti-sparkles text-[12px]"></i>Evaluate
+                      title="Generate an AI report for this task"
+                      class="inline-flex items-center gap-1 px-3 py-2 rounded-md bg-accent text-white text-[10px] font-semibold hover:bg-[#0057a8] transition-colors cursor-pointer">
+                <i class="ti ti-robot text-[12px]"></i>Generate Report
               </button>
             </td>
           </tr>
@@ -67,7 +67,7 @@
       </table>
     </div>
 
-    <!-- ===== AI EVALUATION MODAL ===== -->
+    <!-- ===== AI REPORT MODAL ===== -->
     <div v-if="evalModal.open" @click.self="closeEvaluate"
          class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
       <div class="bg-white rounded-[14px] w-full max-w-[560px] max-h-[90vh] shadow-2xl flex flex-col overflow-hidden">
@@ -76,13 +76,9 @@
         <div class="px-6 py-4 border-b border-[#E1E4E9] flex items-start justify-between shrink-0">
           <div>
             <div class="flex items-center gap-2 mb-0.5">
-              <i class="ti ti-sparkles text-accent text-[15px]"></i>
-              <span class="text-[13px] font-semibold">AI Evaluation</span>
+              <i class="ti ti-robot text-accent text-[15px]"></i>
+              <span class="text-[13px] font-semibold">AI Report</span>
               <span class="text-[9px] px-1.5 py-0.5 rounded bg-[#0D2B4F] text-white font-medium">Claude AI</span>
-              <span v-if="evalModal.demo"
-                    class="text-[9px] px-1.5 py-0.5 rounded bg-[#FEF3E0] text-warn border border-[#FAD999] font-medium">
-                Demo Mode
-              </span>
             </div>
             <div class="text-[11px] text-muted truncate max-w-[380px]">{{ evalModal.task?.title }}</div>
           </div>
@@ -95,9 +91,9 @@
           <!-- Loading state -->
           <div v-if="evalModal.loading" class="flex flex-col items-center justify-center py-12 gap-4">
             <div class="w-14 h-14 rounded-full border-4 border-[#E1E4E9] border-t-accent animate-spin"></div>
-            <div class="text-[13px] font-medium text-[#1A2332]">Analysing your files…</div>
+            <div class="text-[13px] font-medium text-[#1A2332]">Generating AI report...</div>
             <div class="text-[11px] text-muted text-center max-w-[280px]">
-              Claude AI is reviewing the content against {{ evalModal.task?.departmentName || 'department' }} standards.
+              Claude AI is creating a stakeholder report summary for {{ evalModal.task?.departmentName || 'this department' }}.
             </div>
           </div>
 
@@ -107,7 +103,7 @@
             <div class="w-12 h-12 rounded-full bg-[#FDE8EC] flex items-center justify-center">
               <i class="ti ti-alert-triangle text-accent text-[22px]"></i>
             </div>
-            <div class="text-[13px] font-semibold">Evaluation Failed</div>
+            <div class="text-[13px] font-semibold">Report Generation Failed</div>
             <div class="text-[12px] text-muted max-w-[340px]">{{ evalModal.error }}</div>
             <button @click="runEvaluate"
                     class="mt-2 inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-accent text-white text-[12px] cursor-pointer hover:opacity-90 border border-accent">
@@ -164,7 +160,7 @@
 
             <!-- Criteria bars -->
             <div class="mb-5">
-              <div class="text-[10px] font-semibold uppercase tracking-wider text-muted mb-3">Evaluation Criteria</div>
+              <div class="text-[10px] font-semibold uppercase tracking-wider text-muted mb-3">Report Criteria</div>
               <div class="space-y-3">
                 <div v-for="c in evalModal.result.criteria" :key="c.name">
                   <div class="flex items-center justify-between mb-1">
@@ -216,13 +212,12 @@
         <div v-if="!evalModal.loading && evalModal.result"
              class="px-6 py-3 border-t border-[#E1E4E9] bg-[#F9FAFB] shrink-0 flex items-center justify-between">
           <span class="text-[10px] text-muted">
-            <i class="ti ti-sparkles text-[10px]"></i>
-            {{ evalModal.demo ? 'Demo evaluation · Add ANTHROPIC_API_KEY to .env for live AI' : 'Powered by Claude AI' }}
-            · Based on {{ evalModal.task?.departmentName }} standards
+            <i class="ti ti-robot text-[10px]"></i>
+            Powered by Claude AI · Auto report generation support
           </span>
           <button @click="runEvaluate"
                   class="inline-flex items-center gap-1 px-3 py-[5px] rounded-md border border-[#E1E4E9] bg-white text-[11px] text-muted hover:bg-[#F4F5F7] cursor-pointer">
-            <i class="ti ti-refresh text-[12px]"></i>Re-evaluate
+            <i class="ti ti-refresh text-[12px]"></i>Regenerate Report
           </button>
         </div>
 
@@ -289,11 +284,11 @@ function statusClass(s) {
   }[s] ?? 'bg-[#F4F5F7] text-muted border-[#E1E4E9]'
 }
 
-// ── AI Evaluation ─────────────────────────────────────────────────────────────
-const evalModal = ref({ open: false, task: null, loading: false, result: null, error: '', demo: false })
+// ── AI Report ─────────────────────────────────────────────────────────────────
+const evalModal = ref({ open: false, task: null, loading: false, result: null, error: '' })
 
 function openEvaluate(task) {
-  evalModal.value = { open: true, task, loading: false, result: null, error: '', demo: false }
+  evalModal.value = { open: true, task, loading: false, result: null, error: '' }
   runEvaluate()
 }
 
@@ -305,13 +300,11 @@ async function runEvaluate() {
   evalModal.value.loading = true
   evalModal.value.result  = null
   evalModal.value.error   = ''
-  evalModal.value.demo    = false
   try {
-    const res = await api.evaluateTask(evalModal.value.task._id)
+    const res = await api.generateReport(evalModal.value.task._id)
     evalModal.value.result = res.evaluation
-    evalModal.value.demo   = res.demo === true
   } catch (e) {
-    evalModal.value.error = e.message || 'Evaluation failed. Please try again.'
+    evalModal.value.error = e.message || 'Report generation failed. Please try again.'
   } finally {
     evalModal.value.loading = false
   }
